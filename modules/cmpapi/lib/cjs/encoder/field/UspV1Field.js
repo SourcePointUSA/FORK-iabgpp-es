@@ -1,0 +1,1 @@
+"use strict";var UspV1Field;Object.defineProperty(exports,"__esModule",{value:!0}),exports.UspV1Field=void 0,function(e){e.VERSION="Version",e.NOTICE="Notice",e.OPT_OUT_SALE="OptOutSale",e.LSPA_COVERED="LspaCovered"}(UspV1Field=exports.UspV1Field||(exports.UspV1Field={}));

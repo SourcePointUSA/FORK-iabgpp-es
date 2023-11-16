@@ -1,0 +1,1 @@
+"use strict";Object.defineProperty(exports,"__esModule",{value:!0}),exports.LazyDecodingError=void 0;const DecodingError_js_1=require("./DecodingError.js");class LazyDecodingError extends DecodingError_js_1.DecodingError{constructor(r){super(r),this.name="LazyDecodingError"}}exports.LazyDecodingError=LazyDecodingError;

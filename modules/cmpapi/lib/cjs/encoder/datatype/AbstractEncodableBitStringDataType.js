@@ -1,0 +1,1 @@
+"use strict";Object.defineProperty(exports,"__esModule",{value:!0}),exports.AbstractEncodableBitStringDataType=void 0;class AbstractEncodableBitStringDataType{hasValue(){return void 0!==this.value&&null!==this.value}getValue(){return this.value}setValue(t){this.value=t}}exports.AbstractEncodableBitStringDataType=AbstractEncodableBitStringDataType;

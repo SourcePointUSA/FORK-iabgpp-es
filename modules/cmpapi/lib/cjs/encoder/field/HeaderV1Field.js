@@ -1,0 +1,1 @@
+"use strict";var HeaderV1Field;Object.defineProperty(exports,"__esModule",{value:!0}),exports.HeaderV1Field=void 0,function(e){e.ID="Id",e.VERSION="Version",e.SECTION_IDS="SectionIds"}(HeaderV1Field=exports.HeaderV1Field||(exports.HeaderV1Field={}));
