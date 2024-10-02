@@ -1,13 +1,15 @@
-import { AbstractEncodableSegmentedBitStringSection } from "./AbstractEncodableSegmentedBitStringSection.js";
-export declare class TcfEuV2 extends AbstractEncodableSegmentedBitStringSection {
+import { EncodableSegment } from "../segment/EncodableSegment.js";
+import { AbstractLazilyEncodableSection } from "./AbstractLazilyEncodableSection.js";
+export declare class TcfEuV2 extends AbstractLazilyEncodableSection {
     static readonly ID = 2;
     static readonly VERSION = 2;
     static readonly NAME = "tcfeuv2";
-    private base64UrlEncoder;
     constructor(encodedString?: string);
-    encode(): string;
-    decode(encodedSection: string): void;
-    setFieldValue(fieldName: string, value: any): void;
     getId(): number;
     getName(): string;
+    getVersion(): number;
+    protected initializeSegments(): EncodableSegment[];
+    protected decodeSection(encodedString: string): EncodableSegment[];
+    protected encodeSection(segments: EncodableSegment[]): string;
+    setFieldValue(fieldName: string, value: any): void;
 }

@@ -1,68 +1,15 @@
-import { InvalidFieldError } from "../error/InvalidFieldError.js";
-import { UspV1Field } from "../field/UspV1Field.js";
+import { UspV1CoreSegment } from "../segment/UspV1CoreSegment.js";
+import { AbstractLazilyEncodableSection } from "./AbstractLazilyEncodableSection.js";
 // Deprecated
-export class UspV1 {
+export class UspV1 extends AbstractLazilyEncodableSection {
     static ID = 6;
     static VERSION = 1;
     static NAME = "uspv1";
-    fields;
     constructor(encodedString) {
-        this.fields = new Map();
-        this.fields.set(UspV1Field.VERSION.toString(), UspV1.VERSION);
-        this.fields.set(UspV1Field.NOTICE.toString(), "-");
-        this.fields.set(UspV1Field.OPT_OUT_SALE.toString(), "-");
-        this.fields.set(UspV1Field.LSPA_COVERED.toString(), "-");
+        super();
         if (encodedString && encodedString.length > 0) {
             this.decode(encodedString);
         }
-    }
-    //Overriden
-    hasField(fieldName) {
-        return this.fields.has(fieldName);
-    }
-    //Overriden
-    getFieldValue(fieldName) {
-        if (this.fields.has(fieldName)) {
-            return this.fields.get(fieldName);
-        }
-        else {
-            return null;
-        }
-    }
-    //Overriden
-    setFieldValue(fieldName, value) {
-        if (this.fields.has(fieldName)) {
-            this.fields.set(fieldName, value);
-        }
-        else {
-            throw new InvalidFieldError(fieldName + " not found");
-        }
-    }
-    //Overriden
-    toObj() {
-        let obj = {};
-        for (const fieldName of this.fields.keys()) {
-            let value = this.fields.get(fieldName);
-            obj[fieldName.toString()] = value;
-        }
-        return obj;
-    }
-    //Overriden
-    encode() {
-        let str = "";
-        str += this.getFieldValue(UspV1Field.VERSION.toString());
-        str += this.getFieldValue(UspV1Field.NOTICE.toString());
-        str += this.getFieldValue(UspV1Field.OPT_OUT_SALE.toString());
-        str += this.getFieldValue(UspV1Field.LSPA_COVERED.toString());
-        return str;
-    }
-    //Overriden
-    decode(encodedString) {
-        //TODO: validate
-        this.setFieldValue(UspV1Field.VERSION.toString(), parseInt(encodedString.charAt(0)));
-        this.setFieldValue(UspV1Field.NOTICE.toString(), encodedString.charAt(1));
-        this.setFieldValue(UspV1Field.OPT_OUT_SALE.toString(), encodedString.charAt(2));
-        this.setFieldValue(UspV1Field.LSPA_COVERED.toString(), encodedString.charAt(3));
     }
     //Overriden
     getId() {
@@ -71,5 +18,37 @@ export class UspV1 {
     //Overriden
     getName() {
         return UspV1.NAME;
+    }
+    //Override
+    getVersion() {
+        return UspV1.VERSION;
+    }
+    //Overriden
+    initializeSegments() {
+        let segments = [];
+        segments.push(new UspV1CoreSegment());
+        return segments;
+    }
+    //Overriden
+    decodeSection(encodedString) {
+        let segments = this.initializeSegments();
+        if (encodedString != null && encodedString.length !== 0) {
+            let encodedSegments = encodedString.split(".");
+            for (let i = 0; i < segments.length; i++) {
+                if (encodedSegments.length > i) {
+                    segments[i].decode(encodedSegments[i]);
+                }
+            }
+        }
+        return segments;
+    }
+    // Overriden
+    encodeSection(segments) {
+        let encodedSegments = [];
+        for (let i = 0; i < segments.length; i++) {
+            let segment = segments[i];
+            encodedSegments.push(segment.encode());
+        }
+        return encodedSegments.join(".");
     }
 }

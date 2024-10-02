@@ -2,7 +2,7 @@ import { AbstractEncodableBitStringDataType } from "./AbstractEncodableBitString
 export declare class EncodableFixedIntegerList extends AbstractEncodableBitStringDataType<number[]> {
     private elementBitStringLength;
     private numElements;
-    constructor(elementBitStringLength: number, value: number[]);
+    constructor(elementBitStringLength: number, value: number[], hardFailIfMissing?: boolean);
     encode(): string;
     decode(bitString: string): void;
     substring(bitString: string, fromIndex: number): string;

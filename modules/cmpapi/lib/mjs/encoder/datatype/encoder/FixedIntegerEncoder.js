@@ -1,4 +1,5 @@
 import { DecodingError } from "../../error/DecodingError.js";
+import { EncodingError } from "../../error/EncodingError.js";
 export class FixedIntegerEncoder {
     static encode(value, bitStringLength) {
         //let bitString = value.toString(2);
@@ -19,6 +20,9 @@ export class FixedIntegerEncoder {
             else {
                 bitString += "0";
             }
+        }
+        if (bitString.length > bitStringLength) {
+            throw new EncodingError("Numeric value '" + value + "' is too large for a bit string length of '" + bitStringLength + "'");
         }
         while (bitString.length < bitStringLength) {
             bitString = "0" + bitString;

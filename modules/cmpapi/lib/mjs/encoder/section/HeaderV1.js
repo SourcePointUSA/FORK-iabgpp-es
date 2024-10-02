@@ -1,38 +1,14 @@
-import { CompressedBase64UrlEncoder } from "../datatype/encoder/CompressedBase64UrlEncoder.js";
-import { EncodableFibonacciIntegerRange } from "../datatype/EncodableFibonacciIntegerRange.js";
-import { EncodableFixedInteger } from "../datatype/EncodableFixedInteger.js";
-import { HeaderV1Field } from "../field/HeaderV1Field.js";
-import { AbstractEncodableBitStringSection } from "./AbstractEncodableBitStringSection.js";
-export class HeaderV1 extends AbstractEncodableBitStringSection {
+import { AbstractLazilyEncodableSection } from "./AbstractLazilyEncodableSection.js";
+import { HeaderV1CoreSegment } from "../segment/HeaderV1CoreSegment.js";
+export class HeaderV1 extends AbstractLazilyEncodableSection {
     static ID = 3;
     static VERSION = 1;
     static NAME = "header";
-    base64UrlEncoder = new CompressedBase64UrlEncoder();
     constructor(encodedString) {
-        let fields = new Map();
-        fields.set(HeaderV1Field.ID.toString(), new EncodableFixedInteger(6, HeaderV1.ID));
-        fields.set(HeaderV1Field.VERSION.toString(), new EncodableFixedInteger(6, HeaderV1.VERSION));
-        fields.set(HeaderV1Field.SECTION_IDS.toString(), new EncodableFibonacciIntegerRange([]));
-        let fieldOrder = [
-            HeaderV1Field.ID.toString(),
-            HeaderV1Field.VERSION.toString(),
-            HeaderV1Field.SECTION_IDS.toString(),
-        ];
-        super(fields, fieldOrder);
+        super();
         if (encodedString && encodedString.length > 0) {
             this.decode(encodedString);
         }
-    }
-    //Overriden
-    encode() {
-        let bitString = this.encodeToBitString();
-        let encodedString = this.base64UrlEncoder.encode(bitString);
-        return encodedString;
-    }
-    //Overriden
-    decode(encodedString) {
-        let bitString = this.base64UrlEncoder.decode(encodedString);
-        this.decodeFromBitString(bitString);
     }
     //Overriden
     getId() {
@@ -41,5 +17,37 @@ export class HeaderV1 extends AbstractEncodableBitStringSection {
     //Overriden
     getName() {
         return HeaderV1.NAME;
+    }
+    //Override
+    getVersion() {
+        return HeaderV1.VERSION;
+    }
+    //Overriden
+    initializeSegments() {
+        let segments = [];
+        segments.push(new HeaderV1CoreSegment());
+        return segments;
+    }
+    //Overriden
+    decodeSection(encodedString) {
+        let segments = this.initializeSegments();
+        if (encodedString != null && encodedString.length !== 0) {
+            let encodedSegments = encodedString.split(".");
+            for (let i = 0; i < segments.length; i++) {
+                if (encodedSegments.length > i) {
+                    segments[i].decode(encodedSegments[i]);
+                }
+            }
+        }
+        return segments;
+    }
+    // Overriden
+    encodeSection(segments) {
+        let encodedSegments = [];
+        for (let i = 0; i < segments.length; i++) {
+            let segment = segments[i];
+            encodedSegments.push(segment.encode());
+        }
+        return encodedSegments.join(".");
     }
 }

@@ -229,6 +229,7 @@ export class GVL {
         Object.keys(this.purposes).forEach((purposeId) => {
             this.byPurposeVendorMap[purposeId] = {
                 legInt: new Set(),
+                impCons: new Set(),
                 consent: new Set(),
                 flexible: new Set(),
             };
@@ -260,9 +261,17 @@ export class GVL {
                 vendor.specialPurposes.forEach((purposeId) => {
                     this.bySpecialPurposeVendorMap[String(purposeId)].add(vendorId);
                 });
-                vendor.legIntPurposes.forEach((purposeId) => {
-                    this.byPurposeVendorMap[String(purposeId)].legInt.add(vendorId);
-                });
+                if (vendor.legIntPurposes) {
+                    vendor.legIntPurposes.forEach((purposeId) => {
+                        this.byPurposeVendorMap[String(purposeId)].legInt.add(vendorId);
+                    });
+                }
+                // canada has added impConsPurposes in lieu of europe's legIntPurposes
+                if (vendor.impConsPurposes) {
+                    vendor.impConsPurposes.forEach((purposeId) => {
+                        this.byPurposeVendorMap[String(purposeId)].impCons.add(vendorId);
+                    });
+                }
                 // could not be there
                 if (vendor.flexiblePurposes) {
                     vendor.flexiblePurposes.forEach((purposeId) => {

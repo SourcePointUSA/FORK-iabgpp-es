@@ -29,3 +29,7 @@ export declare enum TcfEuV2Field {
     VENDORS_DISCLOSED_SEGMENT_TYPE = "VendorsDisclosedSegmentType",
     VENDORS_DISCLOSED = "VendorsDisclosed"
 }
+export declare const TCFEUV2_CORE_SEGMENT_FIELD_NAMES: TcfEuV2Field[];
+export declare const TCFEUV2_PUBLISHER_PURPOSES_SEGMENT_FIELD_NAMES: TcfEuV2Field[];
+export declare const TCFEUV2_VENDORS_ALLOWED_SEGMENT_FIELD_NAMES: TcfEuV2Field[];
+export declare const TCFEUV2_VENDORS_DISCLOSED_SEGMENT_FIELD_NAMES: TcfEuV2Field[];

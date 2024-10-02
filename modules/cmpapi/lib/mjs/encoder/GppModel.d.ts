@@ -1,9 +1,10 @@
+import { EncodableSection } from "./section/EncodableSection.js";
 export declare class GppModel {
     private sections;
     private encodedString;
     private decoded;
     private dirty;
-    constructor(encodedString?: string);
+    constructor(encodedString?: string | null);
     setFieldValue(sectionName: string, fieldName: string, value: any): void;
     setFieldValueBySectionId(sectionId: number, fieldName: string, value: any): void;
     getFieldValue(sectionName: string, fieldName: string): any;
@@ -18,11 +19,13 @@ export declare class GppModel {
     getHeader(): any;
     getSection(sectionName: string): any;
     getSectionIds(): any[];
-    encode(): any;
-    decode(str: string): void;
+    protected encodeModel(sections: Map<string, EncodableSection>): string;
+    protected decodeModel(str: string): Map<string, EncodableSection>;
     encodeSection(sectionName: string): string;
     encodeSectionById(sectionId: number): string;
     decodeSection(sectionName: string, encodedString: string): void;
     decodeSectionById(sectionId: number, encodedString: string): void;
     toObject(): {};
+    encode(): string;
+    decode(encodedString: string | null): void;
 }

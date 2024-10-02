@@ -1,7 +1,11 @@
 import { DecodingError } from "../../error/DecodingError.js";
+import { EncodingError } from "../../error/EncodingError.js";
 import { FixedIntegerEncoder } from "./FixedIntegerEncoder.js";
 export class FixedIntegerListEncoder {
     static encode(value, elementBitStringLength, numElements) {
+        if (value.length > numElements) {
+            throw new EncodingError("Too many values '" + value.length + "'");
+        }
         let bitString = "";
         for (let i = 0; i < value.length; i++) {
             bitString += FixedIntegerEncoder.encode(value[i], elementBitStringLength);

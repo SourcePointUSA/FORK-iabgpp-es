@@ -3,7 +3,8 @@ import { DataRetention } from "./DataRetention.js";
 import { VendorUrl } from "./VendorUrl.js";
 export interface Vendor extends GVLMapItem {
     purposes: number[];
-    legIntPurposes: number[];
+    legIntPurposes?: number[];
+    impConsPurposes?: number[];
     flexiblePurposes: number[];
     specialPurposes: number[];
     features: number[];

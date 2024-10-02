@@ -1,7 +1,11 @@
 import { DecodingError } from "../../error/DecodingError.js";
+import { EncodingError } from "../../error/EncodingError.js";
 import { BooleanEncoder } from "./BooleanEncoder.js";
 export class FixedBitfieldEncoder {
     static encode(value, bitStringLength) {
+        if (value.length > bitStringLength) {
+            throw new EncodingError("Too many values '" + value.length + "'");
+        }
         let bitString = "";
         for (let i = 0; i < value.length; i++) {
             bitString += BooleanEncoder.encode(value[i]);
