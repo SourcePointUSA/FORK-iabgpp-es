@@ -45,6 +45,7 @@ export class AbstractLazilyEncodableSection {
             let segment = this.segments[i];
             if (segment.hasField(fieldName)) {
                 segment.setFieldValue(fieldName, value);
+                this.dirty = true;
                 return;
             }
         }

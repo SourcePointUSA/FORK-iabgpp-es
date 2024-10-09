@@ -52,7 +52,7 @@ export class AbstractLazilyEncodableSegment {
     }
     encode() {
         if (this.encodedString == null || this.encodedString.length === 0 || this.dirty) {
-            this.validate();
+            // this.validate();
             this.encodedString = this.encodeSegment(this.fields);
             this.dirty = false;
             this.decoded = true;
