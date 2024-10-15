@@ -379,6 +379,7 @@ export class GppModel {
 
     if (section) {
       section.decode(encodedString);
+      this.dirty = true;
     }
   }
 
