@@ -72,7 +72,7 @@ export abstract class AbstractLazilyEncodableSegment<T extends Fields<any>> impl
 
   public encode(): string {
     if (this.encodedString == null || this.encodedString.length === 0 || this.dirty) {
-      this.validate();
+      // this.validate();
       this.encodedString = this.encodeSegment(this.fields);
       this.dirty = false;
       this.decoded = true;

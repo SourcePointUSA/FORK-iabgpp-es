@@ -71,6 +71,7 @@ export abstract class AbstractLazilyEncodableSection implements EncodableSection
       let segment: EncodableSegment = this.segments[i];
       if (segment.hasField(fieldName)) {
         segment.setFieldValue(fieldName, value);
+        this.dirty = true;
         return;
       }
     }
