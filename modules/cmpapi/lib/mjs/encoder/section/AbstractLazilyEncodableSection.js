@@ -53,6 +53,11 @@ export class AbstractLazilyEncodableSection {
     }
     //Overriden
     toObj() {
+        if (!this.decoded) {
+            this.segments = this.decodeSection(this.encodedString);
+            this.dirty = false;
+            this.decoded = true;
+        }
         let obj = {};
         for (let i = 0; i < this.segments.length; i++) {
             let segmentObject = this.segments[i].toObj();
