@@ -785,4 +785,14 @@ describe("manifest.GppModel", (): void => {
       "Unable to decode 'DBACOeA~~1YNN'. The number of sections does not match the number of sections defined in the header."
     );
   });
+  
+  it("should let us decode a section string, and encode correctly", (): void => {
+    const gppModel = new GppModel();
+
+    gppModel.decodeSectionById(6, "1YNN")
+
+    const gppString = gppModel.encode();
+
+    expect(gppString).to.eql("DBABTA~1YNN")
+  })
 });
