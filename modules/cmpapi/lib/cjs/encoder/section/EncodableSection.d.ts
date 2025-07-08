@@ -7,4 +7,5 @@ export interface EncodableSection {
     toObj(): any;
     encode(): string;
     decode(encodedString: string): void;
+    setIsDirty(status: boolean): void;
 }

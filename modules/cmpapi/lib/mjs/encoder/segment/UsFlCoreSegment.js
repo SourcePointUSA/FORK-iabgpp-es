@@ -3,7 +3,6 @@ import { BitStringEncoder } from "../bitstring/BitStringEncoder.js";
 import { EncodableFixedInteger } from "../datatype/EncodableFixedInteger.js";
 import { EncodableFixedIntegerList } from "../datatype/EncodableFixedIntegerList.js";
 import { DecodingError } from "../error/DecodingError.js";
-import { ValidationError } from "../error/ValidationError.js";
 import { EncodableBitStringFields } from "../field/EncodableBitStringFields.js";
 import { USFL_CORE_SEGMENT_FIELD_NAMES } from "../field/UsFlField.js";
 import { UsFlField } from "../field/UsFlField.js";
@@ -77,93 +76,6 @@ export class UsFlCoreSegment extends AbstractLazilyEncodableSegment {
         }
         catch (e) {
             throw new DecodingError("Unable to decode UsFlCoreSegment '" + encodedString + "'");
-        }
-    }
-    // overriden
-    validate() {
-        let saleOptOutNotice = this.fields.get(UsFlField.SALE_OPT_OUT_NOTICE).getValue();
-        let saleOptOut = this.fields.get(UsFlField.SALE_OPT_OUT).getValue();
-        let targetedAdvertisingOptOutNotice = this.fields
-            .get(UsFlField.TARGETED_ADVERTISING_OPT_OUT_NOTICE)
-            .getValue();
-        let targetedAdvertisingOptOut = this.fields.get(UsFlField.TARGETED_ADVERTISING_OPT_OUT).getValue();
-        let mspaServiceProviderMode = this.fields.get(UsFlField.MSPA_SERVICE_PROVIDER_MODE).getValue();
-        let mspaOptOutOptionMode = this.fields.get(UsFlField.MSPA_OPT_OUT_OPTION_MODE).getValue();
-        if (saleOptOutNotice == 0) {
-            if (saleOptOut != 0) {
-                throw new ValidationError("Invalid usva sale notice / opt out combination: {" + saleOptOutNotice + " / " + saleOptOut + "}");
-            }
-        }
-        else if (saleOptOutNotice == 1) {
-            if (saleOptOut != 1 && saleOptOut != 2) {
-                throw new ValidationError("Invalid usva sale notice / opt out combination: {" + saleOptOutNotice + " / " + saleOptOut + "}");
-            }
-        }
-        else if (saleOptOutNotice == 2) {
-            if (saleOptOut != 1) {
-                throw new ValidationError("Invalid usva sale notice / opt out combination: {" + saleOptOutNotice + " / " + saleOptOut + "}");
-            }
-        }
-        if (targetedAdvertisingOptOutNotice == 0) {
-            if (targetedAdvertisingOptOut != 0) {
-                throw new ValidationError("Invalid usva targeted advertising notice / opt out combination: {" +
-                    targetedAdvertisingOptOutNotice +
-                    " / " +
-                    targetedAdvertisingOptOut +
-                    "}");
-            }
-        }
-        else if (targetedAdvertisingOptOutNotice == 1) {
-            if (saleOptOut != 1 && saleOptOut != 2) {
-                throw new ValidationError("Invalid usva targeted advertising notice / opt out combination: {" +
-                    targetedAdvertisingOptOutNotice +
-                    " / " +
-                    targetedAdvertisingOptOut +
-                    "}");
-            }
-        }
-        else if (targetedAdvertisingOptOutNotice == 2) {
-            if (saleOptOut != 1) {
-                throw new ValidationError("Invalid usva targeted advertising notice / opt out combination: {" +
-                    targetedAdvertisingOptOutNotice +
-                    " / " +
-                    targetedAdvertisingOptOut +
-                    "}");
-            }
-        }
-        if (mspaServiceProviderMode == 0) {
-            if (saleOptOutNotice != 0) {
-                throw new ValidationError("Invalid usva mspa service provider mode / sale opt out notice combination: {" +
-                    mspaServiceProviderMode +
-                    " / " +
-                    saleOptOutNotice +
-                    "}");
-            }
-        }
-        else if (mspaServiceProviderMode == 1) {
-            if (mspaOptOutOptionMode != 2) {
-                throw new ValidationError("Invalid usva mspa service provider / opt out option modes combination: {" +
-                    mspaServiceProviderMode +
-                    " / " +
-                    mspaServiceProviderMode +
-                    "}");
-            }
-            if (saleOptOutNotice != 0) {
-                throw new ValidationError("Invalid usva mspa service provider mode / sale opt out notice combination: {" +
-                    mspaServiceProviderMode +
-                    " / " +
-                    saleOptOutNotice +
-                    "}");
-            }
-        }
-        else if (mspaServiceProviderMode == 2) {
-            if (mspaOptOutOptionMode != 1) {
-                throw new ValidationError("Invalid usva mspa service provider / opt out option modes combination: {" +
-                    mspaServiceProviderMode +
-                    " / " +
-                    mspaOptOutOptionMode +
-                    "}");
-            }
         }
     }
 }

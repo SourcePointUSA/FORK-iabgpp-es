@@ -77,7 +77,11 @@ export class AbstractLazilyEncodableSection {
     }
     decode(encodedString) {
         this.encodedString = encodedString;
+        this.segments = this.decodeSection(this.encodedString);
         this.dirty = false;
         this.decoded = false;
+    }
+    setIsDirty(status) {
+        this.dirty = status;
     }
 }

@@ -8,5 +8,4 @@ export declare class UsCaCoreSegment extends AbstractLazilyEncodableSegment<Enco
     protected initializeFields(): EncodableBitStringFields;
     protected encodeSegment(fields: EncodableBitStringFields): string;
     protected decodeSegment(encodedString: string, fields: EncodableBitStringFields): void;
-    validate(): void;
 }

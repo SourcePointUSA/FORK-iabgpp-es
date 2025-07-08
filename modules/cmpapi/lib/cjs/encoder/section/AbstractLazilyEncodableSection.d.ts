@@ -17,4 +17,5 @@ export declare abstract class AbstractLazilyEncodableSection implements Encodabl
     toObj(): any;
     encode(): string;
     decode(encodedString: string): void;
+    setIsDirty(status: boolean): void;
 }
