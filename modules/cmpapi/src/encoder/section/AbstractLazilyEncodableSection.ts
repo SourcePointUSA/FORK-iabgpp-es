@@ -71,6 +71,7 @@ export abstract class AbstractLazilyEncodableSection implements EncodableSection
       let segment: EncodableSegment = this.segments[i];
       if (segment.hasField(fieldName)) {
         segment.setFieldValue(fieldName, value);
+        this.dirty = true;
         return;
       }
     }
@@ -80,6 +81,12 @@ export abstract class AbstractLazilyEncodableSection implements EncodableSection
 
   //Overriden
   public toObj(): any {
+    if (!this.decoded) {
+      this.segments = this.decodeSection(this.encodedString);
+      this.dirty = false;
+      this.decoded = true;
+    }
+    
     let obj = {};
     for (let i = 0; i < this.segments.length; i++) {
       let segmentObject = this.segments[i].toObj();
