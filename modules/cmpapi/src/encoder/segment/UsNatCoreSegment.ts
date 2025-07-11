@@ -93,13 +93,15 @@ export class UsNatCoreSegment extends AbstractLazilyEncodableSegment<EncodableBi
     );
     fields.put(
       UsNatField.SENSITIVE_DATA_PROCESSING.toString(),
-      new EncodableFixedIntegerList(2, [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]).withValidator(
+      // new EncodableFixedIntegerList(2, [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]).withValidator(
+      new EncodableFixedIntegerList(2, [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]).withValidator(
         nullableBooleanAsTwoBitIntegerListValidator
       )
     );
     fields.put(
       UsNatField.KNOWN_CHILD_SENSITIVE_DATA_CONSENTS.toString(),
-      new EncodableFixedIntegerList(2, [0, 0, 0]).withValidator(nullableBooleanAsTwoBitIntegerListValidator)
+      // new EncodableFixedIntegerList(2, [0, 0, 0]).withValidator(nullableBooleanAsTwoBitIntegerListValidator)
+      new EncodableFixedIntegerList(2, [0, 0]).withValidator(nullableBooleanAsTwoBitIntegerListValidator)
     );
     fields.put(
       UsNatField.PERSONAL_DATA_CONSENTS.toString(),
@@ -138,10 +140,10 @@ export class UsNatCoreSegment extends AbstractLazilyEncodableSegment<EncodableBi
       // Necessary to maintain backwards compatibility when sensitive data processing changed from a
       // length of 12 to 16 and known child sensitive data consents changed from a length of 2 to 3 in the
       // DE, IA, NE, NH, NJ, TN release
-      if (bitString.length == 66) {
-        bitString =
-          bitString.substring(0, 48) + "00000000" + bitString.substring(48, 52) + "00" + bitString.substring(52, 62);
-      }
+      // if (bitString.length == 66) {
+      //   bitString =
+      //     bitString.substring(0, 48) + "00000000" + bitString.substring(48, 52) + "00" + bitString.substring(52, 62);
+      // }
 
       this.bitStringEncoder.decode(bitString, this.getFieldNames(), fields);
     } catch (e) {
