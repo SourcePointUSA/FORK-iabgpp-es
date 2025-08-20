@@ -726,9 +726,13 @@ describe("manifest.GppModel", (): void => {
     let gppModel = new GppModel(gppString);
     gppModel.getFieldValue(UsNat.NAME, UspV1Field.VERSION);
     expect(gppModel.getFieldValue(UsNat.NAME, UsNatField.SENSITIVE_DATA_PROCESSING)).to.eql([
-      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      // 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
     ]);
-    expect(gppModel.getFieldValue(UsNat.NAME, UsNatField.KNOWN_CHILD_SENSITIVE_DATA_CONSENTS)).to.eql([0, 0, 0]);
+    expect(gppModel.getFieldValue(UsNat.NAME, UsNatField.KNOWN_CHILD_SENSITIVE_DATA_CONSENTS)).to.eql(
+      // [0, 0, 0]
+      [0,0]
+    );
   });
 
   it("should decode DBABLA~BAAAAAAAAABA.QA", (): void => {
@@ -746,9 +750,13 @@ describe("manifest.GppModel", (): void => {
     let gppModel = new GppModel(gppString);
     gppModel.getFieldValue(UsNat.NAME, UspV1Field.VERSION);
     expect(gppModel.getFieldValue(UsNat.NAME, UsNatField.SENSITIVE_DATA_PROCESSING)).to.eql([
-      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0,
+      // 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1
     ]);
-    expect(gppModel.getFieldValue(UsNat.NAME, UsNatField.KNOWN_CHILD_SENSITIVE_DATA_CONSENTS)).to.eql([0, 1, 0]);
+    expect(gppModel.getFieldValue(UsNat.NAME, UsNatField.KNOWN_CHILD_SENSITIVE_DATA_CONSENTS)).to.eql(
+      // [0, 1, 0]
+      [0, 1]
+    );
   });
 
   it("should decode DBABLA~BAAAAAAAAQRA.QA", (): void => {
