@@ -6,7 +6,7 @@ import { GppModel } from "../encoder/GppModel.js";
 import { TcfCaV1 } from "../encoder/section/TcfCaV1.js";
 import { TcfEuV2 } from "../encoder/section/TcfEuV2.js";
 import { UspV1 } from "../encoder/section/UspV1.js";
-import { UsNat } from "../encoder/section/UsNat.js";
+import { UsNat } from "../encoder/section/UsNatSP.js";
 import { UsCa } from "../encoder/section/UsCa.js";
 import { UsVa } from "../encoder/section/UsVa.js";
 import { UsCo } from "../encoder/section/UsCo.js";

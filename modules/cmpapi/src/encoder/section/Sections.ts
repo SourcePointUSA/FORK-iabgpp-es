@@ -1,7 +1,7 @@
 import { TcfEuV2 } from "./TcfEuV2.js";
 import { TcfCaV1 } from "./TcfCaV1.js";
 import { UspV1 } from "./UspV1.js";
-import { UsNat } from "./UsNat.js";
+import { UsNat } from "./UsNatSP.js";
 import { UsCa } from "./UsCa.js";
 import { UsVa } from "./UsVa.js";
 import { UsCo } from "./UsCo.js";
