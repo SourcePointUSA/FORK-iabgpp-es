@@ -1,7 +1,5 @@
 .DS_Store
 node_modules/
-modules/**/lib
-modules/**/dist
 modules/**/coverage
 modules/**/node_modules
 modules/**/.nyc_output
