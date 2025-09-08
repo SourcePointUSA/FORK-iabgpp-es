@@ -35,6 +35,7 @@
     "./test/encoder/section/UsIa.test.ts",
     "./test/encoder/section/UsMt.test.ts",
     "./test/encoder/section/UsNat.test.ts",
+    "./test/encoder/section/UsNatSP.test.ts",
     "./test/encoder/section/UsNe.test.ts",
     "./test/encoder/section/UsNh.test.ts",
     "./test/encoder/section/UsNj.test.ts",

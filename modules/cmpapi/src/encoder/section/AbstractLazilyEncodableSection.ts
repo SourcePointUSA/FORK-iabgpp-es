@@ -9,7 +9,7 @@ export abstract class AbstractLazilyEncodableSection implements EncodableSection
   //Overriden
   public abstract getName(): string;
 
-  private segments: EncodableSegment[];
+  protected segments: EncodableSegment[];
 
   private encodedString: string = null;
 

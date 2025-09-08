@@ -19,7 +19,7 @@ export class UsNatCoreSegment extends UsNatCoreSegmentBase {
       this.decode(encodedString);
     }
     if (version === 1) {
-      this.initializeFieldsV1();
+      this.fields = this.initializeFieldsV1();
     }
   }
   

@@ -12,10 +12,14 @@ export class UsNat extends UsNatBase {
 
   constructor(encodedString?: string, version: number = 2) {
     super();
+
+    this.version = version;
+    // need to do this again now that we've set the version unfortunately
+    this.segments = this.initializeSegments();
+
     if (encodedString && encodedString.length > 0) {
       this.decode(encodedString);
     }
-    this.version = version;
   }
 
   //Override
