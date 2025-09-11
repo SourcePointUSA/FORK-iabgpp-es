@@ -4,7 +4,7 @@ import { Sections } from "./section/Sections.js";
 import { TcfCaV1 } from "./section/TcfCaV1.js";
 import { TcfEuV2 } from "./section/TcfEuV2.js";
 import { UspV1 } from "./section/UspV1.js";
-import { UsNat } from "./section/UsNat.js";
+import { UsNat } from "./section/UsNatSP.js";
 import { UsCa } from "./section/UsCa.js";
 import { UsVa } from "./section/UsVa.js";
 import { UsCo } from "./section/UsCo.js";
